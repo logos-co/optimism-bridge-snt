@@ -1,0 +1,26 @@
+{
+    "goerli":{
+       "l1":{
+            "token":"0x3D6AFAA395C31FCd391fE3D562E75fe9E8ec7E6a",
+            "controller":"0x7C9928829641Dd2Fa76AF3408f295A0A116983e3",
+            "tokenFactory":"0x0835493830897f4ebcDf13Bbf38E78fFC65a18f0"
+       },
+       "l2":{
+          "token":"0xf852198D0385c4B871E0B91804ecd47C6bA97351",
+          "controller":"0x6CC7274aF9cE9572d22DFD8545Fb8c9C9Bcb48AD",
+          "tokenFactory":"0x8cc272396Be7583c65BEe82CD7b743c69A87287D"
+       }
+    },
+    "mainnet":{
+       "l1":{
+          "token":"0x744d70FDBE2Ba4CF95131626614a1763DF805B9E",
+          "controller":"0x52aE2B53C847327f95A5084a7C38c0adb12fD302",
+          "tokenFactory":"0xa1c957C0210397D2d0296341627B74411756d476"
+       },
+       "l2":{
+          "token":"",
+          "controller":"",
+          "tokenFactory":""
+       }
+    }
+ }
