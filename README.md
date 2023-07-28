@@ -16,7 +16,7 @@ All tokens, even on Optimism, are MiniMeToken variant, meaning they save all acc
 
 # Differences from regular MiniMeToken
 
-1. There are 2 functions to mint/burn, one is mint() & generateTokens(), and other is burn() & destroyTokens(). One come from MiniMeToken inheritance, and other comes from IOptimismMintableERC20 inheritance. See more on point 2.
-2. MiniMeToken controller (SNTPlaceHolder) is also deployed on Optimism, and it *could* be replaced by another controller that *could* call generateToken function, potentially breaking the bridge, however, if we don't do this change, than it should be fine.
+1. In original MiniMeToken, there is generateToken and destroyToken functions that could be called by TokenController, on in the Optimism side, these functions have been replaced by burn and mint that can only be called by bridge.
+2. MiniMeToken controller (SNTPlaceHolder) is also deployed on Optimism, and it *could* be replaced by another controller that *could* lock transfers, stopping the bridge, however, if we don't do this change, than it should be fine.
 3. MiniMeTokenFactory used in createCloneToken create new MiniMeTokens that are one inheritance down from OptimismMintableMiniMeToken, this is fine, just strange, but it couldnt be different, as clone tokens are not suppoused to be minted by bridge. This function is not even used by us. 
 4. MiniMeToken `version()` had to be renamed to `token_version()` due a conflict on inheritance and requirements of Optimism. Semver inheritance uses version() and this seems a requirement for Optimism.
