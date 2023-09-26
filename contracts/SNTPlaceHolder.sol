@@ -3,7 +3,6 @@ pragma solidity ^0.8.18;
 
 import { TokenController } from "@vacp2p/minime/contracts/TokenController.sol";
 import { MiniMeToken } from "@vacp2p/minime/contracts/MiniMeToken.sol";
-import "./SafeMath.sol";
 import "./Owned.sol";
 
 /*
@@ -31,8 +30,6 @@ import "./Owned.sol";
 ///  logic for transferring control of the token to the network when the offering
 ///  asks it to do so.
 contract SNTPlaceHolder is TokenController, Owned {
-    using SafeMath for uint256;
-
     MiniMeToken public snt;
 
     constructor(address _owner, address payable _snt) {
