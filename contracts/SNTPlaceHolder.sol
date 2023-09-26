@@ -62,6 +62,21 @@ contract SNTPlaceHolder is TokenController, Owned {
         return true;
     }
 
+    /// @notice This method can be used by the controller to extract mistakenly
+    ///  sent tokens to this contract.
+    /// @param _token The address of the token contract that you want to recover
+    ///  set to 0 in case you want to extract ether.
+    function claimTokens(MiniMeToken _token) public onlyOwner {
+        if (address(_token) == address(0)) {
+            payable(owner).transfer(address(this).balance);
+            return;
+        }
+
+        uint256 balance = _token.balanceOf(address(this));
+        _token.transfer(owner, balance);
+        emit ClaimedTokens(address(_token), owner, balance);
+    }
+
     event ClaimedTokens(address indexed _token, address indexed _controller, uint256 _amount);
     event ControllerChanged(address indexed _newController);
 }
