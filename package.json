@@ -1,16 +1,30 @@
 {
-  "name": "optimism-bridge-snt",
+  "name": "@vacp2p/foundry-template",
+  "description": "Foundry-based template for developing Solidity smart contracts used by Vac",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "@eth-optimism/sdk": "^3.0.0",
-    "dotenv": "^16.0.0"
-  },
-  "scripts": {
-    "script": "node index.js"
+  "author": {
+    "name": "0x-r4bbit",
+    "url": "https://github.com/vacp2p"
   },
   "devDependencies": {
-
+    "prettier": "^3.0.0",
+    "solhint-community": "^3.6.0"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "forge",
+    "foundry",
+    "smart-contracts",
+    "solidity",
+    "template"
+  ],
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf cache out",
+    "lint": "pnpm lint:sol && pnpm prettier:check",
+    "lint:sol": "forge fmt --check && pnpm solhint {script,src,test}/**/*.sol",
+    "prettier:check": "prettier --check **/*.{json,md,yml} --ignore-path=.prettierignore",
+    "prettier:write": "prettier --write **/*.{json,md,yml} --ignore-path=.prettierignore"
   }
 }
