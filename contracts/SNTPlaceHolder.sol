@@ -2,7 +2,7 @@
 pragma solidity ^0.8.18;
 
 import { TokenController } from "@vacp2p/minime/contracts/TokenController.sol";
-import { MiniMeToken } from "@vacp2p/minime/contracts/MiniMeToken.sol";
+import { MiniMeBase } from "@vacp2p/minime/contracts/MiniMeBase.sol";
 import "@openzeppelin/contracts/access/Ownable2Step.sol";
 
 /*
@@ -32,8 +32,7 @@ import "@openzeppelin/contracts/access/Ownable2Step.sol";
 contract SNTPlaceHolder is TokenController, Ownable2Step {
     MiniMeBase public snt;
 
-    constructor(address _owner, address payable _snt) {
-        owner = _owner;
+    constructor(address _owner, address payable _snt) Ownable2Step(_owner) {
         snt = MiniMeBase(_snt);
     }
 
