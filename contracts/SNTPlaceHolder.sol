@@ -30,11 +30,11 @@ import "@openzeppelin/contracts/access/Ownable2Step.sol";
 ///  logic for transferring control of the token to the network when the offering
 ///  asks it to do so.
 contract SNTPlaceHolder is TokenController, Ownable2Step {
-    MiniMeToken public snt;
+    MiniMeBase public snt;
 
     constructor(address _owner, address payable _snt) {
         owner = _owner;
-        snt = MiniMeToken(_snt);
+        snt = MiniMeBase(_snt);
     }
 
     /// @notice The owner of this contract can change the controller of the SNT token
