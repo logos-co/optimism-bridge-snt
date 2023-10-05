@@ -6,11 +6,11 @@ import { DeployBridge } from "../script/DeployBridge.s.sol";
 import { DeploymentConfig } from "../script/DeploymentConfig.s.sol";
 
 import { OptimismMintableMiniMeToken } from "../contracts/optimism/OptimismMintableMiniMeToken.sol";
-import { SNTPlaceHolder } from "../contracts/SNTPlaceHolder.sol";
+import { SNTOptimismController } from "../contracts/SNTOptimismController.sol";
 
 contract OptmismMintableMiniMeTokenTest is Test {
     DeploymentConfig internal deploymentConfig;
-    SNTPlaceHolder internal tokenController;
+    SNTOptimismController internal tokenController;
     OptimismMintableMiniMeToken internal bridgeToken;
 
     address internal deployer;
