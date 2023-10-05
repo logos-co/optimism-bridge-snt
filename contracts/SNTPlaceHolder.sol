@@ -3,7 +3,7 @@ pragma solidity ^0.8.18;
 
 import { TokenController } from "@vacp2p/minime/contracts/TokenController.sol";
 import { MiniMeBase } from "@vacp2p/minime/contracts/MiniMeBase.sol";
-import "@openzeppelin/contracts/access/Ownable2Step.sol";
+import { Ownable2Step } from "@openzeppelin/contracts/access/Ownable2Step.sol";
 
 /*
     Copyright 2017, Jordi Baylina
@@ -32,7 +32,7 @@ import "@openzeppelin/contracts/access/Ownable2Step.sol";
 contract SNTPlaceHolder is TokenController, Ownable2Step {
     MiniMeBase public snt;
 
-    constructor(address _owner, address payable _snt) Ownable2Step(_owner) {
+    constructor(address payable _snt) {
         snt = MiniMeBase(_snt);
     }
 
@@ -67,13 +67,13 @@ contract SNTPlaceHolder is TokenController, Ownable2Step {
     ///  set to 0 in case you want to extract ether.
     function claimTokens(MiniMeBase _token) public onlyOwner {
         if (address(_token) == address(0)) {
-            payable(owner).transfer(address(this).balance);
+            payable(owner()).transfer(address(this).balance);
             return;
         }
 
         uint256 balance = _token.balanceOf(address(this));
-        _token.transfer(owner, balance);
-        emit ClaimedTokens(address(_token), owner, balance);
+        _token.transfer(owner(), balance);
+        emit ClaimedTokens(address(_token), owner(), balance);
     }
 
     event ClaimedTokens(address indexed _token, address indexed _controller, uint256 _amount);
