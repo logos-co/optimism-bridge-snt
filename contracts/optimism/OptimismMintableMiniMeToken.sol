@@ -13,6 +13,9 @@ import { Semver } from "./Semver.sol";
 ///         Designed to be backwards compatible with the older StandardL2ERC20 token which was only
 ///         meant for use on L2.
 contract OptimismMintableMiniMeToken is IOptimismMintableERC20, ILegacyMintableERC20, MiniMeBase, Semver {
+    /// @notice Error that is thrown if the sender is not the bridge.
+    error OptimismMintableMiniMeToken_SenderNotBridge();
+
     /// @notice Address of the corresponding version of this token on the remote chain.
     address public immutable REMOTE_TOKEN;
 
@@ -31,7 +34,7 @@ contract OptimismMintableMiniMeToken is IOptimismMintableERC20, ILegacyMintableE
 
     /// @notice A modifier that only allows the bridge to call
     modifier onlyBridge() {
-        require(msg.sender == BRIDGE, "OptimismMintableMiniMeToken: only bridge can mint and burn");
+        if (msg.sender != BRIDGE) revert OptimismMintableMiniMeToken_SenderNotBridge();
         _;
     }
 

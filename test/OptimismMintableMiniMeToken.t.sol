@@ -15,10 +15,12 @@ contract OptmismMintableMiniMeTokenTest is Test {
 
     address internal deployer;
 
+    address internal bridgeAddress;
+
     function setUp() public virtual {
         DeployBridge deployment = new DeployBridge();
         (deploymentConfig, bridgeToken, tokenController) = deployment.run();
-        (deployer,,,,,,,,) = deploymentConfig.activeNetworkConfig();
+        (deployer, bridgeAddress,,,,,,,) = deploymentConfig.activeNetworkConfig();
     }
 
     function testDeployment() public {
@@ -46,5 +48,57 @@ contract OptmismMintableMiniMeTokenTest is Test {
         assertEq(bridgeToken.decimals(), _decimals);
         assertEq(bridgeToken.symbol(), _tokenSymbol);
         assertEq(bridgeToken.transfersEnabled(), _transferEnabled);
+    }
+}
+
+contract MintTest is OptmismMintableMiniMeTokenTest {
+    event Mint(address indexed account, uint256 amount);
+
+    function setUp() public override {
+        OptmismMintableMiniMeTokenTest.setUp();
+    }
+
+    function test_RevertWhen_SenderIsNotBridge() public {
+        vm.expectRevert(OptimismMintableMiniMeToken.OptimismMintableMiniMeToken_SenderNotBridge.selector);
+        bridgeToken.mint(makeAddr("receiver"), 100);
+    }
+
+    function test_Mint() public {
+        address receiver = makeAddr("receiver");
+
+        vm.prank(bridgeAddress);
+        vm.expectEmit(true, true, true, true);
+        emit Mint(receiver, 100);
+        bridgeToken.mint(receiver, 100);
+
+        assertEq(bridgeToken.balanceOf(receiver), 100);
+    }
+}
+
+contract BurnTest is OptmismMintableMiniMeTokenTest {
+    event Burn(address indexed account, uint256 amount);
+
+    function setUp() public override {
+        OptmismMintableMiniMeTokenTest.setUp();
+    }
+
+    function test_RevertWhen_SenderIsNotBridge() public {
+        vm.expectRevert(OptimismMintableMiniMeToken.OptimismMintableMiniMeToken_SenderNotBridge.selector);
+        bridgeToken.burn(makeAddr("holder"), 100);
+    }
+
+    function test_Burn() public {
+        address holder = makeAddr("holder");
+
+        vm.prank(bridgeAddress);
+        bridgeToken.mint(holder, 100);
+        assertEq(bridgeToken.balanceOf(holder), 100);
+
+        vm.prank(bridgeAddress);
+        vm.expectEmit(true, true, true, true);
+        emit Burn(holder, 100);
+        bridgeToken.burn(holder, 100);
+
+        assertEq(bridgeToken.balanceOf(holder), 0);
     }
 }

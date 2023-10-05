@@ -1,1 +1,7 @@
-OptmismMintableMiniMeTokenTest:testDeployment() (gas: 56870)
+BurnTest:testDeployment() (gas: 56874)
+BurnTest:test_Burn() (gas: 124436)
+BurnTest:test_RevertWhen_SenderIsNotBridge() (gas: 10076)
+MintTest:testDeployment() (gas: 56874)
+MintTest:test_Mint() (gas: 110237)
+MintTest:test_RevertWhen_SenderIsNotBridge() (gas: 10076)
+OptmismMintableMiniMeTokenTest:testDeployment() (gas: 56874)
