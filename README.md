@@ -4,21 +4,27 @@ This repository contains code to deploy SNT in Ethereum and bridge it to optimis
 
 Scripts:
 
-`npx hardhat run scripts/deploySNT.js --network <network>` -> deploy to Optimism chain with the `contracts.json`
-configured addresses.
+```
+$ MNEMONIC=$YOUR_MNEMONIC forge script script/DeployBridge.s.sol --fork-url $YOUR_RPC_URL --broadcast
+```
 
-`npx hardhat run scripts/deployOptimism.js --network <network>` -> deploy to an optimism chain with the `contracts.json`
-configured addresses.
+Where
 
-The script `node index.js` uses the configured goerli bridge to bridge 1 STT on Goerli into 1 SNT on Optimism-Goerli.
+- `$YOUR_MNEMONIC` is the mnemonic that contains the account from which you want to deploy. The deploy script will use
+  the first account derived from the mnemonic by default.
+- `$YOUR_RPC_URL` is the RPC endpoint of the node you're connecting to.
 
-To everything work, .env needs to be created out of .env.example.
+You can omit the `--broadcast` option to simulate the deployment before actually performing it.
 
-All tokens, even on Optimism, are MiniMeToken variant, meaning they save all account's balance change on Ethereum state
-for democracy contract ballots. Learn more about MiniMeToken on the official repository
-[Giveth/minime](https://github.com/Giveth/minime).
+All tokens, even on Optimism, are [MiniMeToken variant](https://github.com/vacp2p/minime), meaning they save all
+account's balance change on Ethereum state for democracy contract ballots. Learn more about MiniMeToken on the official
+repository [vacpp2p/minime](https://github.com/vacp2p/minime).
 
 # Differences from regular MiniMeToken
+
+The MiniMeToken used in this repository is a fork of [the original](https://github.com/Giveth/minime). To learn about
+the differences between the fork and the upstream repository, head over to its
+[documentation](https://github.com/vacp2p/minime#readme).
 
 1. There are 2 functions to mint/burn, one is mint() & generateTokens(), and other is burn() & destroyTokens(). One come
    from MiniMeToken inheritance, and other comes from IOptimismMintableERC20 inheritance. See more on point 2.
