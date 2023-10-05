@@ -60,12 +60,12 @@ contract SNTPlaceHolder is TokenController, Ownable2Step {
     function onApprove(address, address, uint256) public pure override returns (bool) {
         return true;
     }
-    
+
     /// @notice This method can be used by the controller to extract mistakenly
     ///  sent tokens to this contract.
     /// @param _token The address of the token contract that you want to recover
     ///  set to 0 in case you want to extract ether.
-    function claimTokens(MiniMeToken _token) public onlyOwner {
+    function claimTokens(MiniMeBase _token) public onlyOwner {
         if (address(_token) == address(0)) {
             payable(owner).transfer(address(this).balance);
             return;
