@@ -8,6 +8,9 @@ import { DeploymentConfig } from "../script/DeploymentConfig.s.sol";
 import { OptimismMintableMiniMeToken } from "../contracts/optimism/OptimismMintableMiniMeToken.sol";
 import { SNTOptimismController } from "../contracts/SNTOptimismController.sol";
 
+import { IERC165 } from "@openzeppelin/contracts/utils/introspection/IERC165.sol";
+import { ILegacyMintableERC20, IOptimismMintableERC20 } from "../contracts/optimism/IOptimismMintableERC20.sol";
+
 contract OptmismMintableMiniMeTokenTest is Test {
     DeploymentConfig internal deploymentConfig;
     SNTOptimismController internal tokenController;
@@ -48,6 +51,19 @@ contract OptmismMintableMiniMeTokenTest is Test {
         assertEq(bridgeToken.decimals(), _decimals);
         assertEq(bridgeToken.symbol(), _tokenSymbol);
         assertEq(bridgeToken.transfersEnabled(), _transferEnabled);
+        assertEq(bridgeToken.version(), "1.0.1");
+    }
+}
+
+contract ERC165Test is OptmismMintableMiniMeTokenTest {
+    function setUp() public override {
+        OptmismMintableMiniMeTokenTest.setUp();
+    }
+
+    function test_supportInterface() public {
+        assertEq(bridgeToken.supportsInterface(type(IOptimismMintableERC20).interfaceId), true);
+        assertEq(bridgeToken.supportsInterface(type(ILegacyMintableERC20).interfaceId), true);
+        assertEq(bridgeToken.supportsInterface(type(IERC165).interfaceId), true);
     }
 }
 
