@@ -53,18 +53,20 @@ contract SNTOptimismController is TokenController, Ownable2Step {
     }
 
     /**
-     * @notice Extract mistakenly sent tokens to this contract.
+     * @notice Send tokens or ether from this contract to owner.
      * @param _token Token contract to recover, 0 to extract ether.
      */
     function claimTokens(MiniMeBase _token) public onlyOwner {
+        uint256 balance;
         if (address(_token) == address(0)) {
-            payable(owner()).transfer(address(this).balance);
+            balance = address(this).balance;
+            payable(msg.sender).transfer(balance);
             return;
+        } else {
+            balance = _token.balanceOf(address(this));
+            _token.transfer(msg.sender, balance);
         }
-
-        uint256 balance = _token.balanceOf(address(this));
-        _token.transfer(owner(), balance);
-        emit ClaimedTokens(address(_token), owner(), balance);
+        emit ClaimedTokens(address(_token), msg.sender, balance);
     }
 
     event ClaimedTokens(address indexed _token, address indexed _controller, uint256 _amount);
