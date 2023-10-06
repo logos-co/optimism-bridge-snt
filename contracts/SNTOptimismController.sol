@@ -29,7 +29,7 @@ import { Ownable2Step } from "@openzeppelin/contracts/access/Ownable2Step.sol";
 ///  The contract allows for SNT transfers and transferFrom and implements the
 ///  logic for transferring control of the token to the network when the offering
 ///  asks it to do so.
-contract SNTPlaceHolder is TokenController, Ownable2Step {
+contract SNTOptimismController is TokenController, Ownable2Step {
     MiniMeBase public snt;
 
     constructor(address payable _snt) {

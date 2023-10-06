@@ -5,10 +5,10 @@ import { MiniMeBase } from "@vacp2p/minime/contracts/MiniMeBase.sol";
 import { BaseScript } from "./Base.s.sol";
 import { DeploymentConfig } from "./DeploymentConfig.s.sol";
 import { OptimismMintableMiniMeToken } from "../contracts/optimism/OptimismMintableMiniMeToken.sol";
-import { SNTPlaceHolder } from "../contracts/SNTPlaceHolder.sol";
+import { SNTOptimismController } from "../contracts/SNTOptimismController.sol";
 
 contract DeployBridge is BaseScript {
-    function run() public returns (DeploymentConfig, OptimismMintableMiniMeToken, SNTPlaceHolder) {
+    function run() public returns (DeploymentConfig, OptimismMintableMiniMeToken, SNTOptimismController) {
         DeploymentConfig deploymentConfig = new DeploymentConfig(broadcaster);
         (
             address deployer,
@@ -33,7 +33,7 @@ contract DeployBridge is BaseScript {
             tokenSymbol,
             transferEnabled
         );
-        SNTPlaceHolder tokenController = new SNTPlaceHolder(payable(address(bridgeToken)));
+        SNTOptimismController tokenController = new SNTOptimismController(payable(address(bridgeToken)));
         bridgeToken.changeController(payable(address(tokenController)));
         vm.stopBroadcast();
         return (deploymentConfig, bridgeToken, tokenController);
