@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/logos-co/optimism-bridge-snt/graph/badge.svg?token=T28C0VOKJC)](https://codecov.io/gh/logos-co/optimism-bridge-snt)
+
 # Bridging SNT with the Optimism SDK
 
 This repository contains code to deploy SNT in Ethereum and bridge it to optimism.
@@ -26,13 +28,6 @@ The MiniMeToken used in this repository is a fork of [the original](https://gith
 the differences between the fork and the upstream repository, head over to its
 [documentation](https://github.com/vacp2p/minime#readme).
 
-1. There are 2 functions to mint/burn, one is mint() & generateTokens(), and other is burn() & destroyTokens(). One come
-   from MiniMeToken inheritance, and other comes from IOptimismMintableERC20 inheritance. See more on point 2.
-2. MiniMeToken controller (SNTPlaceHolder) is also deployed on Optimism, and it _could_ be replaced by another
-   controller that _could_ call generateToken function, potentially breaking the bridge, however, if we don't do this
-   change, than it should be fine.
-3. MiniMeTokenFactory used in createCloneToken create new MiniMeTokens that are one inheritance down from
-   OptimismMintableMiniMeToken, this is fine, just strange, but it couldnt be different, as clone tokens are not
-   suppoused to be minted by bridge. This function is not even used by us.
-4. MiniMeToken `version()` had to be renamed to `token_version()` due a conflict on inheritance and requirements of
+1. MiniMeToken uses generateTokens and destroyTokens operated by controller for mint and burn. OptimismMintableMiniMeToken uses mint and burn operated by bridge. 
+2. MiniMeToken `version()` had to be renamed to `token_version()` due a conflict on inheritance and requirements of
    Optimism. Semver inheritance uses version() and this seems a requirement for Optimism.
