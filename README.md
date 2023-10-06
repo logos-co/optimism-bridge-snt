@@ -28,6 +28,7 @@ The MiniMeToken used in this repository is a fork of [the original](https://gith
 the differences between the fork and the upstream repository, head over to its
 [documentation](https://github.com/vacp2p/minime#readme).
 
-1. MiniMeToken uses generateTokens and destroyTokens operated by controller for mint and burn. OptimismMintableMiniMeToken uses mint and burn operated by bridge. 
+1. MiniMeToken uses generateTokens and destroyTokens operated by controller for mint and burn.
+   OptimismMintableMiniMeToken uses mint and burn operated by bridge.
 2. MiniMeToken `version()` had to be renamed to `token_version()` due a conflict on inheritance and requirements of
    Optimism. Semver inheritance uses version() and this seems a requirement for Optimism.
