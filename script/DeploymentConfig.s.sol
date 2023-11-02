@@ -71,7 +71,7 @@ contract DeploymentConfig is Script {
             parentSnapShotBlock: 0,
             tokenName: "Status Test Token",
             decimals: 18,
-            tokenSymbol: "SNT",
+            tokenSymbol: "STT",
             transferEnabled: true
         });
     }
