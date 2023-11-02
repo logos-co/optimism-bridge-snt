@@ -9,6 +9,9 @@ This repository contains code to deploy SNT in Ethereum and bridge it to optimis
 | **Optimism Mainnet**        |                                                                                                                                                 |                                                                                                              |
 | OptimismMintableMiniMeToken | [`0x650AF3C15AF43dcB218406d30784416D64Cfb6B2`](https://optimistic.etherscan.io/address/0x650AF3C15AF43dcB218406d30784416D64Cfb6B2)              | [`1b3159a`](https://github.com/logos-co/optimism-bridge-snt/commit/1b3159ad4113378d95452866c0c43ca19a05aadd) |
 | SNTOptimismController       | [`0x76352764590378011CAE677b50110Ae02eDE2b62`](https://optimistic.etherscan.io/address/0x76352764590378011CAE677b50110Ae02eDE2b62#readContract) | [`1b3159a`](https://github.com/logos-co/optimism-bridge-snt/commit/1b3159ad4113378d95452866c0c43ca19a05aadd) |
+| **Optimism Goerli**         |                                                                                                                                                 |                                                                                                              |
+| OptimismMintableMiniMeToken | [`0xcAD273fA2bb77875333439FDf4417D995159c3E1`](https://goerli-optimism.etherscan.io/address/0xcAD273fA2bb77875333439FDf4417D995159c3E1)         | [`dc28b89`](https://github.com/logos-co/optimism-bridge-snt/commit/dc28b89d6af0b8f48397b3efaea5e338496e40eb) |
+| SNTOptimismController       | [`0x650AF3C15AF43dcB218406d30784416D64Cfb6B2`](https://goerli-optimism.etherscan.io/address/0x650AF3C15AF43dcB218406d30784416D64Cfb6B2)         | [`dc28b89`](https://github.com/logos-co/optimism-bridge-snt/commit/dc28b89d6af0b8f48397b3efaea5e338496e40eb) |
 
 Scripts:
 
