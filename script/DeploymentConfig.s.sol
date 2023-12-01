@@ -29,6 +29,8 @@ contract DeploymentConfig is Script {
     // solhint-disable-next-line var-name-mixedcase
     address internal SNT_ADDRESS_GOERLI = 0x3D6AFAA395C31FCd391fE3D562E75fe9E8ec7E6a;
     // solhint-disable-next-line var-name-mixedcase
+    address internal SNT_ADDRESS_SEPOLIA = 0xE452027cdEF746c7Cd3DB31CB700428b16cD8E51;
+    // solhint-disable-next-line var-name-mixedcase
     address internal STANDARD_BRIDGE_ADDRESS = 0x4200000000000000000000000000000000000010;
 
     constructor(address _broadcaster) {
@@ -36,6 +38,8 @@ contract DeploymentConfig is Script {
         deployer = _broadcaster;
         if (block.chainid == 31_337) {
             activeNetworkConfig = getOrCreateAnvilEthConfig();
+        } else if (block.chainid == 11_155_420) {
+            activeNetworkConfig = getOptimismSepoliaConfig();
         } else if (block.chainid == 420) {
             activeNetworkConfig = getOptimismGoerliConfig();
         } else if (block.chainid == 10) {
@@ -67,6 +71,20 @@ contract DeploymentConfig is Script {
             deployer: deployer,
             bridgeAddress: STANDARD_BRIDGE_ADDRESS,
             remoteTokenAddress: SNT_ADDRESS_GOERLI,
+            parentTokenAddress: address(0),
+            parentSnapShotBlock: 0,
+            tokenName: "Status Test Token",
+            decimals: 18,
+            tokenSymbol: "STT",
+            transferEnabled: true
+        });
+    }
+
+    function getOptimismSepoliaConfig() public view returns (NetworkConfig memory) {
+        return NetworkConfig({
+            deployer: deployer,
+            bridgeAddress: STANDARD_BRIDGE_ADDRESS,
+            remoteTokenAddress: SNT_ADDRESS_SEPOLIA,
             parentTokenAddress: address(0),
             parentSnapShotBlock: 0,
             tokenName: "Status Test Token",

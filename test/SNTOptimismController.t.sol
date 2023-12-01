@@ -64,14 +64,7 @@ contract ClaimTokensTest is SNTOptimismControllerTest {
     function test_ClaimERC20() public {
         vm.pauseGasMetering();
         vm.startPrank(tokenController.owner());
-        MiniMeToken claimTest = new MiniMeToken(
-          MiniMeToken(payable(address(0))), 
-          0, 
-          "TestClaim", 
-          18, 
-          "TST", 
-          true
-        );
+        MiniMeToken claimTest = new MiniMeToken(MiniMeToken(payable(address(0))), 0, "TestClaim", 18, "TST", true);
         claimTest.generateTokens(address(tokenController), 1234);
 
         assertEq(
